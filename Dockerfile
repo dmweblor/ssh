@@ -1,5 +1,11 @@
-FROM nginx:alpine
+FROM ubuntu:24.04
 
-COPY index.html /usr/share/nginx/html/index.html
+ENV DEBIAN_FRONTEND=noninteractive
 
-EXPOSE 80
+RUN apt update && \
+    apt install -y ttyd bash && \
+    apt clean
+
+EXPOSE 7681
+
+CMD ["ttyd", "-W", "bash"]
